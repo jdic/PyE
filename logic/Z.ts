@@ -27,9 +27,9 @@ export const Z = async (): Promise<void> =>
 
   while (true)
   {
-    const value = await input('Z for (>|<| |):')
+    const value = await input('Z for (>|<|q| |):')
 
-    if (value === 'exit')
+    if (value === 'q')
       break
 
     const z = ZScore(getSplitted(value), stats.mean, stats.sDeviation)
