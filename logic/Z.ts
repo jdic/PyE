@@ -1,6 +1,6 @@
 import { getStatistics, showStatistics } from '../utils/statistics'
 import { getSplitted, toNumber } from '../utils/utils'
-import type { IZ } from '../types/generic'
+import type { IZ } from '../types/Statistics'
 import { input } from '../utils/prompt'
 
 export const ZScore = (value: string[], mean: number, sDeviation: number): IZ =>

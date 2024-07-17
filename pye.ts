@@ -1,4 +1,5 @@
-import select, { Separator } from '@inquirer/select';
+import select, { Separator } from '@inquirer/select'
+import { RegLin } from './logic/RegLin'
 import { Z } from './logic/Z'
 
 console.clear()
@@ -8,6 +9,10 @@ const choices: any =
   {
     name: 'Z',
     value: Z
+  },
+  {
+    name: 'Reg. Lin.',
+    value: RegLin
   },
   new Separator(),
   {
