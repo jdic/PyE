@@ -118,12 +118,17 @@ export const showRegLin = (reg: IRegLin) =>
 
   table.push(['Σ', reg.sx, reg.sy, reg.sxy, reg.sxx, reg.syy, reg.serrXSquared, reg.serrYSquared, reg.serrXY])
 
+  const mValue = m(reg)
+  const bValue = b(reg, mValue)
+  const rValue = Math.abs(r(reg))
+
   console.log(table.toString(), '\n')
   console.log('n:', reg.n)
   console.log('Mean (x\'):', reg.meanX.toFixed(4))
   console.log('Mean (Y\'):', reg.meanY.toFixed(4))
-  console.log('m:', m(reg).toFixed(4))
-  console.log('b:', b(reg, m(reg)).toFixed(4))
-  console.log('r:', r(reg).toFixed(4))
+  console.log('m:', mValue.toFixed(4))
+  console.log('b:', bValue.toFixed(4))
+  console.log('r:', rValue.toFixed(4))
+  console.log('Correlation:', rValue >= 0.7 ? 'Strong' : rValue >= 0.5 ? 'Moderate' : 'Weak')
   console.log('\n')
 }
