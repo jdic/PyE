@@ -1,5 +1,5 @@
-import { getRegLin, showRegLin } from '../utils/statistics'
-import type { IXY } from '../types/Statistics'
+import { getRegLin, showRegLin } from '../utils/regression'
+import type { IXY } from '../types/Regression'
 import { input } from '../utils/prompt'
 
 const createObject = (item: string): IXY =>
