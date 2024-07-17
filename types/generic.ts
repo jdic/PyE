@@ -1,15 +1,21 @@
-export interface Range
+export interface IRange
 {
   min: number
   max: number
 }
 
-export interface Statistics
+export interface IStatistics
 {
   mean: number
   sx: number
   variance: number
   sDeviation: number
-  range: Range
+  mm: IRange
   n: number
+}
+
+export interface IZ
+{
+  base: number
+  z: number
 }

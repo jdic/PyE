@@ -1,19 +1,21 @@
-import { input } from '../utils/prompt'
 import { getStatistics, showStatistics } from '../utils/statistics'
 import { getSplitted, toNumber } from '../utils/utils'
+import type { IZ } from '../types/generic'
+import { input } from '../utils/prompt'
 
-export const ZScore = (value: string[], mean: number, sDeviation: number): number =>
+export const ZScore = (value: string[], mean: number, sDeviation: number): IZ =>
 {
   const valueToFind = parseFloat(value[1] ?? value[0])
 
-  let z = (valueToFind - mean) / sDeviation
+  const base = (valueToFind - mean) / sDeviation
+  let z = base
 
   if (value[0] === '>')
     z += 0.5
   else if (value[0] === '<')
     z -= 0.5
 
-  return z
+  return { base, z }
 }
 
 export const Z = async (): Promise<void> =>
@@ -31,6 +33,12 @@ export const Z = async (): Promise<void> =>
       break
 
     const z = ZScore(getSplitted(value), stats.mean, stats.sDeviation)
-    console.log('Z:'.cyan, z.toFixed(4))
+
+    console.log(`Z: ${z.base.toFixed(4)}`)
+  
+    if (z.base !== z.z)
+      console.log(`Z (±): ${z.z.toFixed(4)}`)
+
+    console.log('\n')
   }
 }

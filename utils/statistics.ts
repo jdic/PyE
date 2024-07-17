@@ -1,6 +1,6 @@
-import type { Statistics } from '../types/generic'
+import type { IStatistics } from '../types/generic'
 
-export const getStatistics = (values: number[]): Statistics =>
+export const getStatistics = (values: number[]): IStatistics =>
 {
   const n = values.length
   const sx = values.reduce((a, b) => a + b, 0)
@@ -10,21 +10,22 @@ export const getStatistics = (values: number[]): Statistics =>
     sum + Math.pow(value - mean, 2), 0) / n
   const sDeviation = Math.sqrt(variance)
 
-  const range =
+  const mm =
   {
     min: mean - (3 * sDeviation),
     max: mean + (3 * sDeviation)
   }
 
-  return { mean, sx, variance, sDeviation, range, n }
+  return { mean, sx, variance, sDeviation, mm, n }
 }
 
-export const showStatistics = (statistics: Statistics) =>
+export const showStatistics = (statistics: IStatistics) =>
 {
-  console.log('\nMean:', statistics.mean.toFixed(4))
-  console.log('Sum:', statistics.sx)
-  console.log('Variance:', statistics.variance.toFixed(4))
-  console.log('Standard Deviation:', statistics.sDeviation.toFixed(4))
-  console.log('Range:', statistics.range.min.toFixed(4), 'to', statistics.range.max.toFixed(4))
+  console.log('\nMean (x\'):', statistics.mean.toFixed(4))
+  console.log('Sum (∑x):', statistics.sx)
+  console.log('Variance (σ²):', statistics.variance.toFixed(4))
+  console.log('sDeviation (σ):', statistics.sDeviation.toFixed(4))
+  console.log('Min/Max (±3σ):', statistics.mm.min.toFixed(4), '-', statistics.mm.max.toFixed(4))
   console.log('n:', statistics.n)
+  console.log('\n')
 }
