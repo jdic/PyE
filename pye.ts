@@ -1,6 +1,5 @@
 import select, { Separator } from '@inquirer/select';
 import { Z } from './logic/Z'
-import 'colors'
 
 console.clear()
 
