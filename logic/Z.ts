@@ -2,6 +2,7 @@ import { getStatistics, showStatistics } from '../utils/statistics'
 import { getSplitted, toNumber } from '../utils/utils'
 import type { IZ } from '../types/Statistics'
 import { input } from '../utils/prompt'
+import ztable from 'ztable'
 
 export const ZScore = (value: string[], mean: number, sDeviation: number): IZ =>
 {
@@ -33,12 +34,14 @@ export const Z = async (): Promise<void> =>
       break
 
     const z = ZScore(getSplitted(value), stats.mean, stats.sDeviation)
+    const zValue = ztable(z.z) - 0.5
 
     console.log(`Z: ${z.base.toFixed(4)}`)
   
     if (z.base !== z.z)
       console.log(`Z (±): ${z.z.toFixed(4)}`)
 
+    console.log(`%: ${zValue.toFixed(4)} ≈ ${(Math.abs(zValue * 100)).toFixed(2)}%`)
     console.log('\n')
   }
 }
