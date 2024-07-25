@@ -21,7 +21,7 @@ export const ZScore = (value: string[], mean: number, sDeviation: number): IZ =>
 
 export const drawNormalDistribution = (mean: number, sDeviation: number, z: number, direction: string): void =>
 {
-  const size = { width: 35, height: 10 }
+  const size = { width: 36, height: 7 }
   const center = Math.floor(size.width / 2)
   const scale = sDeviation * 3 / center
   const zPos = Math.floor((z * sDeviation + mean - mean) / scale + center)
@@ -79,7 +79,7 @@ export const Z = async (): Promise<void> =>
     if (z.base !== z.z)
       console.log(`Z (±): ${z.z.toFixed(4)}`)
 
-    console.log(`%: ${(Math.abs(zValue) * 100).toFixed(2)}%`)
+    console.log(`%: ${zValue.toFixed(4)} ≈ ${(Math.abs(zValue * 100)).toFixed(2)}%`)
     console.log('\n')
 
     drawNormalDistribution(stats.mean, stats.sDeviation, z.base, value[0])
