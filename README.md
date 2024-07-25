@@ -9,6 +9,9 @@ Project to solve my RA of PyE 2P quickly and efficiently.
 ![Step 1 Sigma](https://github.com/user-attachments/assets/8efcbf14-199b-4dba-aac7-f2dc5ffd2899)
 ![Step 2 Sigma](https://github.com/user-attachments/assets/c170fd75-f935-4cf1-9dec-36fc5515c600)
 ![Step 3 Sigma](https://github.com/user-attachments/assets/2073a55d-cacf-4cbd-8d82-34a2372c8343)
+![Gauss Bell](https://github.com/user-attachments/assets/9b787ee9-29ab-4e29-b568-a78da124fe3c)
+
+Note: Warp Terminal does not show emojis correctly, use another terminal.
 
 #### Reg. Lin.
 

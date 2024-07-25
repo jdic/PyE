@@ -19,6 +19,44 @@ export const ZScore = (value: string[], mean: number, sDeviation: number): IZ =>
   return { base, z }
 }
 
+export const drawNormalDistribution = (mean: number, sDeviation: number, z: number, direction: string): void =>
+{
+  const size = { width: 35, height: 10 }
+  const center = Math.floor(size.width / 2)
+  const scale = sDeviation * 3 / center
+  const zPos = Math.floor((z * sDeviation + mean - mean) / scale + center)
+
+  const graph: string[] = []
+
+  for (let y = 0; y < size.height; y++)
+  {
+    const line: string[] = []
+
+    for (let x = 0; x < size.width; x++)
+    {
+      const xPos = (x - center) * scale
+      const gauss = Math.exp(-0.5 * Math.pow(xPos / sDeviation, 2))
+      const gaussScaled = Math.floor(gauss * size.height * 0.6)
+
+      if ((size.height - y) <= gaussScaled)
+      {
+        if ((direction === '>' && x >= zPos) || (direction === '<' && x <= zPos))
+          line.push('🟦')
+
+        else
+          line.push('⬜')
+      }
+
+      else
+        line.push('⬛')
+    }
+
+    graph.push(line.join(''))
+  }
+
+  console.log(graph.join('\n'))
+}
+
 export const Z = async (): Promise<void> =>
 {
   const values = toNumber(getSplitted(await input('Values (,|-| |):')))
@@ -41,7 +79,9 @@ export const Z = async (): Promise<void> =>
     if (z.base !== z.z)
       console.log(`Z (±): ${z.z.toFixed(4)}`)
 
-    console.log(`%: ${zValue.toFixed(4)} ≈ ${(Math.abs(zValue * 100)).toFixed(2)}%`)
+    console.log(`%: ${(Math.abs(zValue) * 100).toFixed(2)}%`)
     console.log('\n')
+
+    drawNormalDistribution(stats.mean, stats.sDeviation, z.base, value[0])
   }
 }
