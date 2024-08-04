@@ -9,14 +9,18 @@ export const ZScore = (value: string[], mean: number, sDeviation: number): IZ =>
   const valueToFind = parseFloat(value[1] ?? value[0])
 
   const base = (valueToFind - mean) / sDeviation
-  let z = base
+  const zscore = Math.abs(ztable(base) - 0.5)
+
+  let newZScore = zscore
 
   if (value[0] === '>')
-    z += 0.5
+    newZScore -= 0.5
   else if (value[0] === '<')
-    z -= 0.5
+    newZScore += 0.5
+  
+  newZScore = Math.abs(newZScore)
 
-  return { base, z }
+  return { base, zscore, newZScore }
 }
 
 export const drawNormalDistribution = (mean: number, sDeviation: number, z: number, direction: string): void =>
@@ -72,14 +76,13 @@ export const Z = async (): Promise<void> =>
       break
 
     const z = ZScore(getSplitted(value), stats.mean, stats.sDeviation)
-    const zValue = ztable(z.z) - 0.5
 
     console.log(`Z: ${z.base.toFixed(4)}`)
   
-    if (z.base !== z.z)
-      console.log(`Z (±): ${z.z.toFixed(4)}`)
+    if (z.base !== z.zscore)
+      console.log(`Z (±): ${z.zscore.toFixed(4)}`)
 
-    console.log(`%: ${zValue.toFixed(4)} ≈ ${(Math.abs(zValue * 100)).toFixed(2)}%`)
+    console.log(`%: ${z.newZScore.toFixed(4)} ≈ ${(Math.abs(z.newZScore * 100)).toFixed(2)}%`)
     console.log('\n')
 
     drawNormalDistribution(stats.mean, stats.sDeviation, z.base, value[0])
