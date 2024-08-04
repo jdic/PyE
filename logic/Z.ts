@@ -3,6 +3,7 @@ import { getSplitted, toNumber } from '../utils/utils'
 import type { IZ } from '../types/Statistics'
 import { input } from '../utils/prompt'
 import ztable from 'ztable'
+import konsole from '@jdic/konsole'
 
 export const ZScore = (value: string[], mean: number, sDeviation: number): IZ =>
 {
@@ -13,7 +14,12 @@ export const ZScore = (value: string[], mean: number, sDeviation: number): IZ =>
 
   let newZScore = zscore
 
-  if (value[0] === '>')
+  if (value[0] === '>' && valueToFind <= mean)
+    newZScore += 0.5
+  else if (value[0] === '>')
+    newZScore -= 0.5
+
+  else if (value[0] === '<' && valueToFind <= mean)
     newZScore -= 0.5
   else if (value[0] === '<')
     newZScore += 0.5

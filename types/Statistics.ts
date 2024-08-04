@@ -17,5 +17,6 @@ export interface IStatistics
 export interface IZ
 {
   base: number
-  z: number
+  zscore: number
+  newZScore: number
 }
