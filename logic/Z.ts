@@ -3,7 +3,6 @@ import { getSplitted, toNumber } from '../utils/utils'
 import type { IZ } from '../types/Statistics'
 import { input } from '../utils/prompt'
 import ztable from 'ztable'
-import konsole from '@jdic/konsole'
 
 export const ZScore = (value: string[], mean: number, sDeviation: number): IZ =>
 {
